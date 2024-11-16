@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Database.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Database;
