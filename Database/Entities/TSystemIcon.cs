@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Database.Entities;
+﻿namespace Database.Entities;
 
 public partial class TSystemIcon
 {

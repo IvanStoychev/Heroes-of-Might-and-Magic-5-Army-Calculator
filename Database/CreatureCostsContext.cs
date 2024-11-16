@@ -1,4 +1,5 @@
-﻿using Database.Entities;
+﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 
 namespace Database;
@@ -52,6 +53,8 @@ public partial class CreatureCostsContext : DbContext
         {
             entity.ToTable("t_Factions");
 
+            entity.HasIndex(e => e.Name, "IX_t_Factions_Name").IsUnique();
+
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Name).IsRequired();
         });
@@ -59,8 +62,6 @@ public partial class CreatureCostsContext : DbContext
         modelBuilder.Entity<TSystemIcon>(entity =>
         {
             entity.ToTable("t_SystemIcons");
-
-            entity.HasIndex(e => e.Id, "IX_t_SystemIcons_ID").IsUnique();
 
             entity.HasIndex(e => e.ImageBytes, "IX_t_SystemIcons_ImageBytes").IsUnique();
 
