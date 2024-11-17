@@ -1,10 +1,10 @@
 ﻿namespace Database.Entities;
 
-public partial class TCreature
+public partial class Creature
 {
-    public int Id { get; set; }
+    public int ID { get; set; }
 
-    public int FactionId { get; set; }
+    public int FactionID { get; set; }
 
     public byte[] ImageBytesBase { get; set; }
 
@@ -20,5 +20,5 @@ public partial class TCreature
 
     public int Growth { get; set; }
 
-    public virtual TFaction Faction { get; set; }
+    public virtual Faction Faction { get; set; }
 }

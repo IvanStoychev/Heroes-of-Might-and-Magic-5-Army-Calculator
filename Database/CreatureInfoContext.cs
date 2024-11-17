@@ -1,38 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using Database.Entities;
+﻿using Database.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Database;
 
-public partial class CreatureCostsContext : DbContext
+public partial class CreatureInfoContext : DbContext
 {
-    public CreatureCostsContext()
+    public CreatureInfoContext()
     {
     }
 
-    public CreatureCostsContext(DbContextOptions<CreatureCostsContext> options)
+    public CreatureInfoContext(DbContextOptions<CreatureInfoContext> options)
         : base(options)
     {
     }
 
-    public virtual DbSet<TCreature> TCreatures { get; set; }
+    public virtual DbSet<Creature> TCreatures { get; set; }
 
-    public virtual DbSet<TFaction> TFactions { get; set; }
+    public virtual DbSet<Faction> TFactions { get; set; }
 
-    public virtual DbSet<TSystemIcon> TSystemIcons { get; set; }
+    public virtual DbSet<SystemIcon> TSystemIcons { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlite("Data Source=HoMM5 ToE creature costs v1.0.db");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<TCreature>(entity =>
+        modelBuilder.Entity<Creature>(entity =>
         {
             entity.ToTable("t_Creatures");
 
-            entity.Property(e => e.Id).HasColumnName("ID");
-            entity.Property(e => e.FactionId).HasColumnName("FactionID");
+            entity.Property(e => e.ID).HasColumnName("ID");
+            entity.Property(e => e.FactionID).HasColumnName("FactionID");
             entity.Property(e => e.GoldCostBase).HasColumnName("GoldCost_Base");
             entity.Property(e => e.GoldCostUpg).HasColumnName("GoldCost_Upg");
             entity.Property(e => e.ImageBytesBase)
@@ -46,21 +44,21 @@ public partial class CreatureCostsContext : DbContext
                 .HasColumnName("ImageBytes_UpgAlt");
 
             entity.HasOne(d => d.Faction).WithMany(p => p.TCreatures)
-                .HasForeignKey(d => d.FactionId)
+                .HasForeignKey(d => d.FactionID)
                 .OnDelete(DeleteBehavior.ClientSetNull);
         });
 
-        modelBuilder.Entity<TFaction>(entity =>
+        modelBuilder.Entity<Faction>(entity =>
         {
             entity.ToTable("t_Factions");
 
             entity.HasIndex(e => e.Name, "IX_t_Factions_Name").IsUnique();
 
-            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.ID).HasColumnName("ID");
             entity.Property(e => e.Name).IsRequired();
         });
 
-        modelBuilder.Entity<TSystemIcon>(entity =>
+        modelBuilder.Entity<SystemIcon>(entity =>
         {
             entity.ToTable("t_SystemIcons");
 
@@ -68,7 +66,7 @@ public partial class CreatureCostsContext : DbContext
 
             entity.HasIndex(e => e.Name, "IX_t_SystemIcons_Name").IsUnique();
 
-            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.ID).HasColumnName("ID");
             entity.Property(e => e.ImageBytes).IsRequired();
             entity.Property(e => e.Name).IsRequired();
         });

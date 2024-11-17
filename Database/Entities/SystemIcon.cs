@@ -1,8 +1,8 @@
 ﻿namespace Database.Entities;
 
-public partial class TSystemIcon
+public partial class SystemIcon
 {
-    public int Id { get; set; }
+    public int ID { get; set; }
 
     public string Name { get; set; }
 
