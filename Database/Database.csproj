@@ -30,10 +30,6 @@
 	<None Update="Default database initialisation.sql">
 		<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	</None>
-    <None Update="HoMM5 ToE creature costs v1.0.db">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-	</None>
   </ItemGroup>
 
 	<Target Name="PreBuild" BeforeTargets="PreBuildEvent" Condition="'$(BuildingInsideVisualStudio)' == 'true'">

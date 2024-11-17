@@ -6,5 +6,5 @@ public partial class Faction
 
     public string Name { get; set; }
 
-    public virtual ICollection<Creature> TCreatures { get; set; } = new List<Creature>();
+    public virtual ICollection<Creature> Creatures { get; set; } = new List<Creature>();
 }

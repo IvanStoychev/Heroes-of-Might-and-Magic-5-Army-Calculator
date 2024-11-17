@@ -14,11 +14,11 @@ public partial class CreatureInfoContext : DbContext
     {
     }
 
-    public virtual DbSet<Creature> TCreatures { get; set; }
+    public virtual DbSet<Creature> Creatures { get; set; }
 
-    public virtual DbSet<Faction> TFactions { get; set; }
+    public virtual DbSet<Faction> Factions { get; set; }
 
-    public virtual DbSet<SystemIcon> TSystemIcons { get; set; }
+    public virtual DbSet<SystemIcon> SystemIcons { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlite("Data Source=HoMM5 ToE creature costs v1.0.db");
@@ -43,7 +43,7 @@ public partial class CreatureInfoContext : DbContext
                 .IsRequired()
                 .HasColumnName("ImageBytes_UpgAlt");
 
-            entity.HasOne(d => d.Faction).WithMany(p => p.TCreatures)
+            entity.HasOne(d => d.Faction).WithMany(p => p.Creatures)
                 .HasForeignKey(d => d.FactionID)
                 .OnDelete(DeleteBehavior.ClientSetNull);
         });
