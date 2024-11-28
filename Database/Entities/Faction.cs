@@ -11,7 +11,7 @@ public partial class Faction
     public int ID { get; }
 
     /// <summary>
-    /// The faction name.
+    /// How the faction is referred to in the game.
     /// </summary>
     public string Name { get; set; }
 
@@ -19,5 +19,5 @@ public partial class Faction
     /// A collection of <c>Creature</c> entities that belong to this faction. <para/>
     /// This collection is initialized as an empty list by default.
     /// </summary>
-    public virtual ICollection<Creature> Creatures { get; set; } = new List<Creature>();
+    public virtual ICollection<Creature> Creatures { get; set; } = [];
 }

@@ -33,20 +33,20 @@ public partial class Creature
     /// <summary>
     /// The tier of the creature.
     /// </summary>
-    public uint Tier { get; set; }
+    public int Tier { get; set; }
 
     /// <summary>
-    /// The gold cost of the creature.
+    /// Amount of gold it takes to recruit a single base creature of this type.
     /// </summary>
     public int GoldCostBase { get; set; }
 
     /// <summary>
-    /// The gold cost of the creature upgrade.
+    /// Amount of gold it takes to recruit a single upgraded creature of this type.
     /// </summary>
     public int GoldCostUpg { get; set; }
 
     /// <summary>
-    /// The growth rate of the creature.
+    /// Amount of creatures available for recruitment each week.
     /// </summary>
     public int Growth { get; set; }
 

@@ -8,7 +8,7 @@ public partial class SystemIcon
     /// <summary>
     /// Primary key of this record in the database.
     /// </summary>
-    public int ID { get; set; }
+    public int ID { get; }
 
     /// <summary>
     /// The icon name. 
