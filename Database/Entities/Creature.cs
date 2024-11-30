@@ -31,7 +31,7 @@ public partial class Creature
     public byte[] ImageBytesUpgAlt { get; set; }
     
     /// <summary>
-    /// The tier of the creature.
+    /// The in-game tier of the creature. 
     /// </summary>
     public int Tier { get; set; }
 
