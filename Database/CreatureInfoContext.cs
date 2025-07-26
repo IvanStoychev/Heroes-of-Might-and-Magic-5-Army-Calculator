@@ -20,9 +20,6 @@ public partial class CreatureInfoContext : DbContext
 
     public virtual DbSet<SystemIcon> SystemIcons { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlite("Data Source=HoMM5 ToE creature costs v1.0.db");
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Creature>(entity =>

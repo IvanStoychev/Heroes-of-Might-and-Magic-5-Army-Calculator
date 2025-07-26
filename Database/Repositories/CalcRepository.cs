@@ -2,7 +2,7 @@
 
 namespace Database.Repositories
 {
-    internal class CalcRepository(CreatureInfoContext dbContext)
+    public class CalcRepository(CreatureInfoContext dbContext)
     {
         private readonly CreatureInfoContext dbContext = dbContext;
 
@@ -13,7 +13,6 @@ namespace Database.Repositories
 
         public ICollection<Creature> GetFactionCreatures(int factionID)
         {
-            // TODO: Maybe handle if the faction doesn't exist.
             return [.. dbContext.Creatures.Where(c => c.FactionID == factionID)];
         }
     }
