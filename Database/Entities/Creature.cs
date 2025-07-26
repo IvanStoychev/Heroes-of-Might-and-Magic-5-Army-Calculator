@@ -16,7 +16,7 @@ public partial class Creature
     public int FactionID { get; set; }
 
     /// <summary>
-    /// Byte representation of the image for the base creature.
+    /// Byte representation of the image for the creature with a base upgrade.
     /// </summary>
     public byte[] ImageBytesBase { get; set; }
 
