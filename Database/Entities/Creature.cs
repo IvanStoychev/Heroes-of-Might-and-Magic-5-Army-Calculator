@@ -6,32 +6,32 @@
 public partial class Creature
 {
     /// <summary>
-    /// Primary key of this record in the database.
+    /// Unique identifier for the creature.
     /// </summary>
     public int ID { get; }
 
     /// <summary>
-    /// Foreign key of the faction the creature belongs to.
+    /// ID of the faction the creature belongs to.
     /// </summary>
     public int FactionID { get; set; }
 
     /// <summary>
-    /// Byte representation of the image of the creature.
+    /// Byte representation of the image for the base creature.
     /// </summary>
     public byte[] ImageBytesBase { get; set; }
 
     /// <summary>
-    /// Byte representation of the image of the creature's upgrade. 
+    /// Byte representation of the image for the creature with an upgrade.
     /// </summary>
     public byte[] ImageBytesUpg { get; set; }
 
     /// <summary>
-    /// Byte representation of the image of the creature's alternative upgrade.
+    /// Byte representation of the image for the creature with an alternative upgrade.
     /// </summary>
     public byte[] ImageBytesUpgAlt { get; set; }
     
     /// <summary>
-    /// The in-game tier of the creature. 
+    /// An integer representation of the creature tier.
     /// </summary>
     public int Tier { get; set; }
 
@@ -51,7 +51,7 @@ public partial class Creature
     public int Growth { get; set; }
 
     /// <summary>
-    /// A <c>Faction</c> entity the creature belongs to.
+    /// The <c>Faction</c> the creature belongs to.
     /// </summary>
     public virtual Faction Faction { get; set; }
 }
