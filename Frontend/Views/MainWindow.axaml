@@ -8,5 +8,8 @@
         x:Class="Frontend.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="Frontend">
+	<StackPanel>
         <views:MainView />
+		<views:CreatureView />
+	</StackPanel>
 </Window>
