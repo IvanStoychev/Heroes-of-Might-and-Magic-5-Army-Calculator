@@ -2,7 +2,76 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Frontend.CreatureView">
-  Welcome to Avalonia!
+             xmlns:vm="clr-namespace:Frontend.ViewModels"
+			 xmlns:enums="clr-namespace:Frontend.Utils.Enums"
+			 xmlns:conv="clr-namespace:Frontend.Utils.Converters"
+             x:Class="Frontend.Views.CreatureView"
+             x:DataType="vm:CreatureViewModel"
+             mc:Ignorable="d"
+             d:DesignWidth="800" d:DesignHeight="120">
+
+	<UserControl.Resources>
+		<conv:BoolToThicknessConverter x:Key="BoolToThickness"/>
+	</UserControl.Resources>
+
+	<StackPanel Orientation="Horizontal" Spacing="15" Margin="10" VerticalAlignment="Center">
+
+		<!-- Creature Portraits -->
+		<Button Background="Transparent" BorderThickness="0"
+				Command="{Binding SelectVariantCommand}"
+				CommandParameter="{x:Static enums:CreatureVariant.Base}">
+			<Border BorderBrush="Gold"
+					BorderThickness="{Binding IsBaseSelected, Converter={StaticResource BoolToThickness}}">
+				<Image Width="90" Height="90" Source="{Binding BasePortrait}"/>
+			</Border>
+		</Button>
+
+		<Button Background="Transparent" BorderThickness="0"
+				Command="{Binding SelectVariantCommand}"
+				CommandParameter="{x:Static enums:CreatureVariant.Upgraded}">
+			<Border BorderBrush="Gold"
+					BorderThickness="{Binding IsUpgSelected, Converter={StaticResource BoolToThickness}}">
+				<Image Width="90" Height="90" Source="{Binding UpgradedPortrait}"/>
+			</Border>
+		</Button>
+
+		<Button Background="Transparent" BorderThickness="0"
+				Command="{Binding SelectVariantCommand}"
+				CommandParameter="{x:Static enums:CreatureVariant.Alternate}">
+			<Border BorderBrush="Gold"
+					BorderThickness="{Binding IsAltSelected, Converter={StaticResource BoolToThickness}}">
+				<Image Width="90" Height="90" Source="{Binding AlternateUpgradedPortrait}"/>
+			</Border>
+		</Button>
+
+		<!-- Creature Info -->
+		<StackPanel Spacing="10">
+			
+			<!-- Row 1 -->
+			<StackPanel Orientation="Horizontal" Spacing="5" VerticalAlignment="Center">
+				<TextBlock Text="Number of creatures:" VerticalAlignment="Center"/>
+				<NumericUpDown 
+					Minimum="0" 
+					Maximum="999" 
+					Increment="1"
+					Value="{Binding CreatureCount}" 
+					Width="150" />
+			</StackPanel>
+
+			<!-- Row 2 -->
+			<StackPanel Orientation="Horizontal" Spacing="15" VerticalAlignment="Center">
+				<TextBlock Text="{Binding TotalGoldCost, StringFormat='Gold cost: {0}'}" VerticalAlignment="Center"/>
+			</StackPanel>
+
+			<!-- Row 3 -->
+			<StackPanel Orientation="Horizontal" Spacing="15" VerticalAlignment="Center">
+				<TextBlock Text="{Binding RequiredWeeks, StringFormat='Weeks required: {0}'}"/>
+				<Image Width="20" Height="20" Source="{Binding GrowthIcon}" />
+				<TextBlock Text="{Binding WeeklyGrowth}" VerticalAlignment="Center" />
+				<Image Width="20" Height="20" Source="{Binding GoldIcon}" />
+				<TextBlock Text="{Binding GoldPerUnit}" VerticalAlignment="Center" />
+			</StackPanel>
+			
+		</StackPanel>
+	</StackPanel>
 </UserControl>
