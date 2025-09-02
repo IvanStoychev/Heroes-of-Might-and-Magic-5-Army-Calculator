@@ -13,12 +13,11 @@
 
       <ItemsControl.ItemTemplate>
         <DataTemplate>
-          <!-- Reuse your existing single-creature card -->
+          <!-- Reusing existing single-creature card -->
           <views:CreatureView />
         </DataTemplate>
       </ItemsControl.ItemTemplate>
-
-      <!-- Optional spacing between cards -->
+		
       <ItemsControl.Styles>
         <Style Selector="ItemsControl > WrapPanel > *">
           <Setter Property="Margin" Value="8"/>
