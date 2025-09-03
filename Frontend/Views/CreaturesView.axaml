@@ -11,18 +11,14 @@
         </ItemsPanelTemplate>
       </ItemsControl.ItemsPanel>
 
-      <ItemsControl.ItemTemplate>
-        <DataTemplate>
-          <!-- Reusing existing single-creature card -->
-          <views:CreatureView />
-        </DataTemplate>
-      </ItemsControl.ItemTemplate>
-		
-      <ItemsControl.Styles>
-        <Style Selector="ItemsControl > WrapPanel > *">
-          <Setter Property="Margin" Value="8"/>
-        </Style>
-      </ItemsControl.Styles>
+		<ItemsControl.ItemTemplate>
+			<DataTemplate>
+				<Border Margin="8">
+					<views:CreatureView DataContext="{Binding}" />
+				</Border>
+			</DataTemplate>
+		</ItemsControl.ItemTemplate>
+
     </ItemsControl>
   </ScrollViewer>
 </UserControl>
