@@ -1,10 +1,7 @@
 using Avalonia.Controls;
-
 using Database;
-
 using System.Collections.ObjectModel;
 using System.Linq;
-
 using Frontend.ViewModels;
 
 namespace Frontend.Views;

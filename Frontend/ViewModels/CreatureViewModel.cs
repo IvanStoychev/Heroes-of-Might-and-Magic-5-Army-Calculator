@@ -1,16 +1,11 @@
 ﻿using Avalonia.Media.Imaging;
-
 using CommunityToolkit.Mvvm.Input;
-
 using Database;
 using Database.Mocks;
-
 using Microsoft.EntityFrameworkCore;
-
 using System;
 using System.IO;
 using System.Linq;
-
 using Frontend.Utils.Enums;
 
 namespace Frontend.ViewModels;

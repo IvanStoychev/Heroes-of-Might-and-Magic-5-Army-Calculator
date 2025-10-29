@@ -1,10 +1,9 @@
-﻿namespace Frontend.Utils.Converters;
-
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Data.Converters;
-
 using System.Globalization;
 using System;
+
+namespace Frontend.Utils.Converters;
 
 /// <summary>
 /// Converts a boolean value into an Avalonia <see cref="Thickness"/>.
