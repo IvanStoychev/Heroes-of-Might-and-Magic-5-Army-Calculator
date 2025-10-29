@@ -1,6 +1,4 @@
-﻿namespace Frontend.ViewModels;
-
-using Avalonia.Media.Imaging;
+﻿using Avalonia.Media.Imaging;
 
 using CommunityToolkit.Mvvm.Input;
 
@@ -14,6 +12,8 @@ using System.IO;
 using System.Linq;
 
 using Frontend.Utils.Enums;
+
+namespace Frontend.ViewModels;
 
 public class CreatureViewModel : ViewModelBase
 {

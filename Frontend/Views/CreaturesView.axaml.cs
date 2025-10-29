@@ -1,5 +1,3 @@
-namespace Frontend.Views;
-
 using Avalonia.Controls;
 
 using Database;
@@ -8,6 +6,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 
 using Frontend.ViewModels;
+
+namespace Frontend.Views;
 
 /// <summary>
 /// View responsible for displaying a collection of creatures.

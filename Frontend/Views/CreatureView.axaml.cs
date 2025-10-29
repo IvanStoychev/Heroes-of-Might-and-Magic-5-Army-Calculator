@@ -1,6 +1,6 @@
-namespace Frontend.Views;
-
 using Avalonia.Controls;
+
+namespace Frontend.Views;
 
 /// <summary>
 /// Code-behind for <see cref="CreatureView"/>. 

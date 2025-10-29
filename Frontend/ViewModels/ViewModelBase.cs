@@ -1,6 +1,6 @@
-﻿namespace Frontend.ViewModels;
+﻿using System.ComponentModel;
 
-using System.ComponentModel;
+namespace Frontend.ViewModels;
 
 /// <summary>
 /// Base class for all view models, implements INotifyPropertyChanged to support data binding.
