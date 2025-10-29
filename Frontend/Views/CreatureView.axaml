@@ -1,0 +1,188 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Frontend.ViewModels"
+             xmlns:enums="clr-namespace:Frontend.Utils.Enums"
+             xmlns:conv="clr-namespace:Frontend.Utils.Converters"
+             x:Class="Frontend.Views.CreatureView"
+             x:DataType="vm:CreatureViewModel"
+             mc:Ignorable="d"
+             d:DesignWidth="880" d:DesignHeight="140">
+
+	<!-- Resources: brushes & converters ONLY -->
+	<UserControl.Resources>
+		<conv:BoolToThicknessConverter x:Key="BoolToThickness"/>
+		<SolidColorBrush x:Key="CardBg" Color="#1E1E24"/>
+		<SolidColorBrush x:Key="CardBorder" Color="#2D2D35"/>
+		<SolidColorBrush x:Key="Accent" Color="#FFD54A"/>
+		<SolidColorBrush x:Key="TextDim" Color="#B0B0B8"/>
+	</UserControl.Resources>
+
+	<!-- Styles -->
+	<UserControl.Styles>
+		<!-- portrait buttons -->
+		<Style Selector="Button.portrait">
+			<Setter Property="Background" Value="Transparent"/>
+			<Setter Property="BorderBrush" Value="Transparent"/>
+			<Setter Property="BorderThickness" Value="0"/>
+			<Setter Property="Padding" Value="0"/>
+			<Setter Property="Cursor" Value="Hand"/>
+			<Setter Property="RenderTransform">
+				<ScaleTransform ScaleX="1" ScaleY="1"/>
+			</Setter>
+		</Style>
+
+		<!-- simple hover scale using pseudo-class -->
+		<Style Selector="Button.portrait:pointerover">
+			<Setter Property="RenderTransform">
+				<ScaleTransform ScaleX="1.04" ScaleY="1.04"/>
+			</Setter>
+		</Style>
+
+		<!-- stat pill -->
+		<Style Selector="Border.stat">
+			<Setter Property="CornerRadius" Value="8"/>
+			<Setter Property="Background" Value="#272730"/>
+			<Setter Property="Padding" Value="4,2"/>
+		</Style>
+
+		<!-- compact numeric -->
+		<Style Selector="NumericUpDown.compact">
+			<Setter Property="Height" Value="32"/>
+			<Setter Property="MinWidth" Value="120"/>
+		</Style>
+	</UserControl.Styles>
+
+	<!-- CARD -->
+	<Border Background="{StaticResource CardBg}"
+			BorderBrush="{StaticResource CardBorder}"
+			BorderThickness="1"
+			CornerRadius="14"
+			Padding="14"
+			Margin="8">
+
+		<Border.Effect>
+			<DropShadowEffect BlurRadius="18" Opacity="0.35" OffsetY="6"/>
+		</Border.Effect>
+
+		<Grid ColumnDefinitions="Auto,16,*,16,Auto"
+			  RowDefinitions="Auto,8,Auto,8,Auto">
+
+			<!-- PORTRAITS -->
+			<StackPanel Orientation="Horizontal" Spacing="10" Grid.RowSpan="5">
+				<Button Classes="portrait"
+						Command="{Binding SelectVariantCommand}"
+						CommandParameter="{x:Static enums:CreatureVariant.Base}">
+					<Border CornerRadius="10"
+							BorderBrush="{StaticResource Accent}"
+							BorderThickness="{Binding IsBaseSelected, Converter={StaticResource BoolToThickness}}"
+							Background="#2A2A33" Padding="2">
+						<Border CornerRadius="8" ClipToBounds="True">
+							<Image Width="96" Height="96"
+								   Stretch="UniformToFill"
+								   Source="{Binding BasePortrait}"/>
+						</Border>
+					</Border>
+				</Button>
+
+				<Button Classes="portrait"
+						Command="{Binding SelectVariantCommand}"
+						CommandParameter="{x:Static enums:CreatureVariant.Upgraded}">
+					<Border CornerRadius="10"
+							BorderBrush="{StaticResource Accent}"
+							BorderThickness="{Binding IsUpgSelected, Converter={StaticResource BoolToThickness}}"
+							Background="#2A2A33" Padding="2">
+						<Border CornerRadius="8" ClipToBounds="True">
+							<Image Width="96" Height="96"
+								   Stretch="UniformToFill"
+								   Source="{Binding UpgradedPortrait}"/>
+						</Border>
+					</Border>
+				</Button>
+
+				<Button Classes="portrait"
+						Command="{Binding SelectVariantCommand}"
+						CommandParameter="{x:Static enums:CreatureVariant.Alternate}">
+					<Border CornerRadius="10"
+							BorderBrush="{StaticResource Accent}"
+							BorderThickness="{Binding IsAltSelected, Converter={StaticResource BoolToThickness}}"
+							Background="#2A2A33" Padding="2">
+						<Border CornerRadius="8" ClipToBounds="True">
+							<Image Width="96" Height="96"
+								   Stretch="UniformToFill"
+								   Source="{Binding AlternateUpgradedPortrait}"/>
+						</Border>
+					</Border>
+				</Button>
+			</StackPanel>
+
+			<!-- COUNT -->
+			<TextBlock Grid.Column="2" Grid.Row="0"
+					   Text="Number of creatures:"
+					   VerticalAlignment="Center" FontSize="16" />
+
+			<NumericUpDown Grid.Column="4" Grid.Row="0"
+						   Classes="compact"
+						   Minimum="0" Maximum="999" Increment="1"
+						   FormatString="0" ClipValueToMinMax="True"
+						   Value="{Binding CreatureCountInput, Mode=TwoWay, FallbackValue=0, TargetNullValue=0}"/>
+
+			<!-- GOLD COST -->
+			<Grid Grid.Column="2" Grid.Row="2" VerticalAlignment="Center">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto" SharedSizeGroup="LabelCol"/>
+					<ColumnDefinition Width="12"/>
+					<ColumnDefinition Width="Auto"/>
+				</Grid.ColumnDefinitions>
+
+				<!-- label -->
+				<TextBlock Grid.Column="0"
+						   Text="Gold cost:"
+						   FontSize="16"
+						   VerticalAlignment="Center"/>
+
+				<!-- value pill -->
+				<Border Grid.Column="2" Classes="stat" VerticalAlignment="Center">
+					<StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+						<Image Width="18" Height="18" Source="{Binding GoldIcon}" />
+						<TextBlock Text="{Binding TotalGoldCost}" FontWeight="SemiBold" VerticalAlignment="Center"/>
+					</StackPanel>
+				</Border>
+			</Grid>
+
+			<!-- WEEKS / GROWTH / COST PER UNIT ROW -->
+			<Grid Grid.Column="2" Grid.Row="4" VerticalAlignment="Center">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto" SharedSizeGroup="LabelCol"/>
+					<ColumnDefinition Width="12"/>
+					<ColumnDefinition Width="Auto"/>
+				</Grid.ColumnDefinitions>
+
+				<!-- label -->
+				<TextBlock Grid.Column="0"
+						   Text="{Binding RequiredWeeks, StringFormat='Weeks required: {0}'}"
+						   Foreground="{StaticResource TextDim}"
+						   VerticalAlignment="Center"/>
+
+				<!-- value pills -->
+				<StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="12" VerticalAlignment="Center">
+					<Border Classes="stat" VerticalAlignment="Center">
+						<StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+							<Image Width="18" Height="18" Source="{Binding GrowthIcon}" />
+							<TextBlock Text="{Binding WeeklyGrowth}" VerticalAlignment="Center"/>
+						</StackPanel>
+					</Border>
+
+					<Border Classes="stat" VerticalAlignment="Center">
+						<StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+							<Image Width="18" Height="18" Source="{Binding GoldIcon}" />
+							<TextBlock Text="{Binding GoldPerUnit}" VerticalAlignment="Center"/>
+						</StackPanel>
+					</Border>
+				</StackPanel>
+			</Grid>
+		
+		</Grid>
+	</Border>
+</UserControl>

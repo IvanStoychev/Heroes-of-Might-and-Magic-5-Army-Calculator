@@ -3,14 +3,84 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:Frontend.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="Frontend.Views.MainView"
-             x:DataType="vm:MainViewModel">
-  <Design.DataContext>
-    <!-- This only sets the DataContext for the previewer in an IDE,
-         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-    <vm:MainViewModel />
-  </Design.DataContext>
+             x:DataType="vm:MainViewModel"
+             mc:Ignorable="d"
+             d:DesignWidth="800" d:DesignHeight="100">
 
-  <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+	<UserControl.Resources>
+		<LinearGradientBrush x:Key="HeaderGradient" StartPoint="0,0" EndPoint="1,0">
+			<GradientStop Color="#2B2B34" Offset="0"/>
+			<GradientStop Color="#1F1F26" Offset="1"/>
+		</LinearGradientBrush>
+		<SolidColorBrush x:Key="Accent" Color="#FFD54A"/>
+		<SolidColorBrush x:Key="TextDim" Color="#B0B0B8"/>
+	</UserControl.Resources>
+
+	<Border Margin="12"
+			CornerRadius="14"
+			Background="{StaticResource HeaderGradient}"
+			BorderBrush="#2F2F38"
+			BorderThickness="1"
+			Padding="16">
+		<Border.Effect>
+			<DropShadowEffect BlurRadius="18" Opacity="0.35" OffsetY="6"/>
+		</Border.Effect>
+
+		<!-- logo | title/subtitle | version -->
+		<Grid ColumnDefinitions="Auto,20,*,Auto"
+			RowDefinitions="Auto">
+
+			<!-- Logo circle -->
+			<Border Grid.Column="0"
+					Width="100" Height="100"
+					CornerRadius="44"
+					Background="#30303A"
+					BorderBrush="{StaticResource Accent}"
+					BorderThickness="3"
+					HorizontalAlignment="Left" VerticalAlignment="Center"
+					ClipToBounds="True">
+				<Image Source="avares://Frontend/Assets/homm.logo.png"
+					   Width="88" Height="88"
+					   Stretch="Uniform"/>
+			</Border>
+
+			<!-- Title + Subtitle block -->
+			<Grid Grid.Column="2"
+				  Margin="0,4,8,0"
+				VerticalAlignment="Center">
+				<!-- keep the whole block centered against the logo -->
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="4"/>
+					<!-- tight spacing between title and subtitle -->
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+
+				<TextBlock Grid.Row="0"
+						   Text="{Binding Greeting}"
+						   FontSize="26"
+						   FontWeight="SemiBold"
+						   TextWrapping="Wrap"
+						   MaxLines="1"/>
+
+				<TextBlock Grid.Row="2"
+						   Text="{Binding Subtitle}"
+						   Foreground="{StaticResource TextDim}"
+						   FontSize="13"
+						   TextWrapping="Wrap"/>
+			</Grid>
+
+			<!-- Version pill -->
+			<Border Grid.Column="3"
+					Background="#2B2B34"
+					Padding="8,4"
+					CornerRadius="8"
+					HorizontalAlignment="Right"
+					VerticalAlignment="Center">
+				<TextBlock Text="{Binding VersionTag}" FontSize="12"/>
+			</Border>
+		</Grid>
+
+	</Border>
 </UserControl>

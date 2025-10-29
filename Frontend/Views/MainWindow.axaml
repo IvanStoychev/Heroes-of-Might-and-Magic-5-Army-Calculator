@@ -6,7 +6,10 @@
         xmlns:views="clr-namespace:Frontend.Views"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Frontend.Views.MainWindow"
-        Icon="/Assets/avalonia-logo.ico"
-        Title="Frontend">
-        <views:MainView />
+        Icon="/Assets/homm-logo.ico"
+        Title="HOMM V Army Calculator">
+	<Grid RowDefinitions="Auto,*">
+		<views:MainView Grid.Row="0"/>
+		<views:CreaturesView Grid.Row="1"/>
+	</Grid>
 </Window>

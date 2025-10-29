@@ -1,0 +1,24 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:views="clr-namespace:Frontend.Views"
+             x:Class="Frontend.Views.CreaturesView">
+
+  <ScrollViewer>
+    <ItemsControl x:Name="CreatureList" Margin="8">
+      <ItemsControl.ItemsPanel>
+        <ItemsPanelTemplate>
+          <WrapPanel Orientation="Horizontal" />
+        </ItemsPanelTemplate>
+      </ItemsControl.ItemsPanel>
+
+		<ItemsControl.ItemTemplate>
+			<DataTemplate>
+				<Border Margin="8">
+					<views:CreatureView DataContext="{Binding}" />
+				</Border>
+			</DataTemplate>
+		</ItemsControl.ItemTemplate>
+
+    </ItemsControl>
+  </ScrollViewer>
+</UserControl>
