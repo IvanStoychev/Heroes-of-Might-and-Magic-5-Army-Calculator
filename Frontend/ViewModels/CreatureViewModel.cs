@@ -13,10 +13,10 @@ namespace Frontend.ViewModels;
 public class CreatureViewModel : ViewModelBase
 {
     private readonly CreatureInfoContext dbContext;
-    private readonly Creature _creature;
+    private readonly Creature creature;
 
     private CreatureVariant _selectedVariant = CreatureVariant.Base;
-    private int _creatureCount;
+    private int creatureCount;
 
     /// <summary>
     /// Command that sets the selected creature variant when a portrait is clicked.
@@ -107,12 +107,12 @@ public class CreatureViewModel : ViewModelBase
     /// </summary>
     public int CreatureCount
     {
-        get => _creatureCount;
+        get => creatureCount;
         private set
         {
-            if (_creatureCount != value)
+            if (creatureCount != value)
             {
-                _creatureCount = value;
+                creatureCount = value;
                 OnPropertyChanged(nameof(CreatureCount));
                 OnPropertyChanged(nameof(TotalGoldCost));
                 OnPropertyChanged(nameof(RequiredWeeks));
@@ -142,10 +142,10 @@ public class CreatureViewModel : ViewModelBase
     public int GoldPerUnit =>
         SelectedVariant switch
         {
-            CreatureVariant.Base => _creature.GoldCostBase,
-            CreatureVariant.Upgraded => _creature.GoldCostUpg,
-            CreatureVariant.Alternate => _creature.GoldCostUpg,
-            _ => _creature.GoldCostBase
+            CreatureVariant.Base => creature.GoldCostBase,
+            CreatureVariant.Upgraded => creature.GoldCostUpg,
+            CreatureVariant.Alternate => creature.GoldCostUpg,
+            _ => creature.GoldCostBase
         };
 
     /// <summary>
@@ -172,18 +172,18 @@ public class CreatureViewModel : ViewModelBase
     {
         dbContext = context;
 
-        _creature = dbContext.Creatures
+        creature = dbContext.Creatures
             .Include(c => c.Faction)
             .FirstOrDefault(c => c.ID == creatureId);
 
-        if (_creature == null)
+        if (creature == null)
             return;
 
-        BasePortrait = ConvertToBitmap(_creature.ImageBytesBase);
-        UpgradedPortrait = ConvertToBitmap(_creature.ImageBytesUpg);
-        AlternateUpgradedPortrait = ConvertToBitmap(_creature.ImageBytesUpgAlt);
+        BasePortrait = ConvertToBitmap(creature.ImageBytesBase);
+        UpgradedPortrait = ConvertToBitmap(creature.ImageBytesUpg);
+        AlternateUpgradedPortrait = ConvertToBitmap(creature.ImageBytesUpgAlt);
 
-        WeeklyGrowth = _creature.Growth;
+        WeeklyGrowth = creature.Growth;
 
         GoldIcon = GetSystemIcon("gold");
         GrowthIcon = GetSystemIcon("growth");
